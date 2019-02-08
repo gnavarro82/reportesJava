@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Municipios" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="860eecb2-29dc-4fe8-8604-1c3aefb8f094">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id_estado" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     t_estado.`estado` AS t_estado_estado,
+     t_municipio.`idt_municipio` AS t_municipio_idt_municipio,
+     t_municipio.`municipio` AS t_municipio_municipio
+FROM
+     `t_estado` t_estado INNER JOIN `t_municipio` t_municipio ON t_estado.`idt_estado` = t_municipio.`idt_estado`
+WHERE t_estado.idt_estado = $P!{id_estado}]]>
+	</queryString>
+	<field name="t_estado_estado" class="java.lang.String"/>
+	<field name="t_municipio_idt_municipio" class="java.lang.Integer"/>
+	<field name="t_municipio_municipio" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="63" splitType="Stretch">
+			<staticText>
+				<reportElement x="107" y="15" width="295" height="42" uuid="c7e6c952-e73c-4bbc-9915-da5afae52c9d"/>
+				<textElement>
+					<font size="30"/>
+				</textElement>
+				<text><![CDATA[Reportes en PDF]]></text>
+			</staticText>
+			<image>
+				<reportElement x="23" y="15" width="71" height="32" uuid="43f89027-b9c8-4de1-8422-6fde19912441"/>
+				<imageExpression><![CDATA["C:\\Users\\Natalia\\Pictures\\in_log_logo.gif"]]></imageExpression>
+			</image>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="402" y="27" width="170" height="20" uuid="3ae60ecf-fa5f-4ccc-987a-705f8946be90"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement x="7" y="2" width="51" height="20" uuid="21d3ec37-4553-4a9d-8bc5-07c1cfc5be03"/>
+				<text><![CDATA[Estado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="135" y="2" width="100" height="20" uuid="fa07064b-5ff3-45e1-a4d8-a9dee8c9597f"/>
+				<text><![CDATA[Id Municipio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="241" y="2" width="100" height="20" uuid="7706ad98-3f40-44ce-a28d-b8cfde36e150"/>
+				<text><![CDATA[Municipio]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<textField>
+				<reportElement x="7" y="1" width="117" height="20" uuid="4c915d83-0261-4fd4-b1e4-113102f98a4b"/>
+				<textFieldExpression><![CDATA[$F{t_estado_estado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="135" y="1" width="100" height="20" uuid="ffc698e9-ace1-4be6-a105-6d88f641ab66"/>
+				<textFieldExpression><![CDATA[$F{t_municipio_idt_municipio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="241" y="0" width="195" height="20" uuid="42b247b5-3142-4e49-a332-14fb178a9cb5"/>
+				<textFieldExpression><![CDATA[$F{t_municipio_municipio}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="33" splitType="Stretch">
+			<textField>
+				<reportElement x="176" y="13" width="80" height="20" uuid="03004c69-8834-4696-aaa3-65aca52786be"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="279" y="13" width="40" height="20" uuid="2c823795-1367-46c0-bd40-c8ac7e322a0e"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
